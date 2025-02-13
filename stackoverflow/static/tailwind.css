@@ -1,0 +1,26 @@
+.bg-amber-500{
+    background-color: orange;
+}
+
+.p-2{
+    padding: 10px;
+}
+.bflex{
+    display: flex;
+}
+.justify-centerb{
+    display: flex;
+    justify-content: center;
+}
+.items-centerb{
+    display: flex;
+    align-items: center;
+}
+.text-amber-500{
+    color: orange;
+}
+.w-32{
+    width: 220px;
+    display: flex;
+    gap: 23px;
+}

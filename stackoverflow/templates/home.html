@@ -1,0 +1,70 @@
+{% extends "base.html" %}
+{% block content %}
+
+<!-- main hero section -->
+<div class="hero-section text-center py-20 bg-cover bg-center bg-no-repeat bg-amber-200">
+    {% if messages %}
+    <div class="messages-section text-center py-4">
+        {% for message in messages %}
+            <div class="message bg-green-100 text-green-800 p-2 rounded mb-2">
+                {{ message }}
+            </div>
+        {% endfor %}
+    </div>
+    {% endif %}
+    <h1 class="text-3xl md:text-5xl font-bold mb-4 text-white">Welcome to Stack Overflow</h1>
+    <p class="text-base md:text-lg mb-8 text-white">Find the Best Answers from a vast Community of Devs</p>
+    <div class="flex flex-col md:flex-row justify-center gap-4">
+        <a href="/shop" class="border-2 border-white text-white py-2 px-4 rounded hover:bg-white hover:text-amber-500 transition-colors">For developers</a>
+        <a href="/shop" class="bg-amber-500 text-white py-2 px-4 rounded hover:bg-amber-600 transition-colors">For businesses</a>
+        <a href="/shop" class="border-2 border-white text-white py-2 px-4 rounded hover:bg-white hover:text-amber-500 transition-colors">For students</a>
+    </div>
+</div>
+
+<!-- introductory lines before testimonials -->
+<div class="intro-section text-center py-10 bg-gray-200">
+    <h2 class="text-2xl md:text-3xl font-bold mb-4">Join Our Community</h2>
+    <p class="text-base md:text-lg mb-8">Become a part of the largest developer community and get answers to your coding questions.</p>
+</div>
+
+<!-- testimonials section -->
+<div class="testimonials-section py-20 bg-gray-100">
+    <h2 class="text-3xl md:text-4xl font-bold text-center mb-12">What Our Users Say</h2>
+    <div class="flex flex-col md:flex-row justify-center space-y-8 md:space-y-0 md:space-x-8">
+        <div class="testimonial bg-white p-6 rounded shadow-md transition-transform transform hover:scale-105">
+            <p class="text-gray-700 mb-4">"Stack Overflow has been a game-changer for my development career. The community is incredibly helpful and knowledgeable."</p>
+            <p class="font-bold text-gray-900">- John Doe</p>
+        </div>
+        <div class="testimonial bg-white p-6 rounded shadow-md transition-transform transform hover:scale-105">
+            <p class="text-gray-700 mb-4">"I found answers to all my coding questions on Stack Overflow. It's an invaluable resource for developers."</p>
+            <p class="font-bold text-gray-900">- Jane Smith</p>
+        </div>
+        <div class="testimonial bg-white p-6 rounded shadow-md transition-transform transform hover:scale-105">
+            <p class="text-gray-700 mb-4">"The community on Stack Overflow is amazing. I've learned so much from the answers and discussions."</p>
+            <p class="font-bold text-gray-900">- Alex Johnson</p>
+        </div>
+    </div>
+</div>
+
+<!-- featured questions section -->
+<div class="questions-section py-20 bg-white">
+    <h2 class="text-3xl md:text-4xl font-bold text-center mb-12">Featured Questions</h2>
+    <div class="flex flex-col md:flex-row justify-center space-y-8 md:space-y-0 md:space-x-8">
+        <div class="question bg-gray-100 p-6 rounded shadow-md">
+            <h3 class="text-2xl font-bold mb-4">How to center a div in CSS?</h3>
+            <p class="text-lg mb-4">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer nec odio. Praesent libero. Sed cursus ante dapibus diam.</p>
+            <a href="/questions/1" class="text-amber-500">Read more</a>
+        </div>
+        <div class="question bg-gray-100 p-6 rounded shadow-md">
+            <h3 class="text-2xl font-bold mb-4">What is the difference between let and var in JavaScript?</h3>
+            <p class="text-lg mb-4">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer nec odio. Praesent libero. Sed cursus ante dapibus diam.</p>
+            <a href="/questions/2" class="text-amber-500">Read more</a>
+        </div>
+        <div class="question bg-gray-100 p-6 rounded shadow-md">
+            <h3 class="text-2xl font-bold mb-4">How to use Python for data analysis?</h3>
+            <p class="text-lg mb-4">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer nec odio. Praesent libero. Sed cursus ante dapibus diam.</p>
+            <a href="/questions/3" class="text-amber-500">Read more</a>
+        </div>
+    </div>
+</div>
+{% endblock %}

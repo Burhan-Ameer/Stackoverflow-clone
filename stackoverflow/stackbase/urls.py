@@ -1,0 +1,22 @@
+from django.urls import path
+from stackbase import views as stackbase_views
+from stackusers.views import register, login_page, logout_page,profile,update_profile
+
+
+urlpatterns = [
+    path("", stackbase_views.home, name="home"),
+    path("register/", register, name="register"),
+    path("login/", login_page, name="login"),
+    path("logout/", logout_page, name="logout"),
+    path("profile/",profile,name="profile"),
+    path("update_profile/",update_profile,name="update_profile"),
+    # crud part of app
+    path("questions/",stackbase_views.QuestionsListView.as_view(),name="questions"),
+    # Details of questions
+    path("questions/<int:pk>/",stackbase_views.DetailedCreateView.as_view(),name="question_detail"),
+    # create questions
+    path("ask_questions/",stackbase_views.askquestions,name="ask_questions"),   
+    # update questions
+    path("questions/<int:question_id>/update/",stackbase_views.update_question,name="update_question"),
+    path("questions/<int:question_id>/delete/",stackbase_views.delete_question,name="delete_question")
+]
