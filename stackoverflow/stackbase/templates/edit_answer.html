@@ -13,7 +13,7 @@
                     required>{{ answer.answer }}</textarea>
             </div>
             <div class="flex justify-end space-x-4">
-                <a href="{% url 'question_detail' answer.id %}" class="bg-gray-500 text-white px-6 py-2 rounded-lg hover:bg-gray-600 transition-colors">
+                <a href="{% url 'answer_question' answer.id %}" class="bg-gray-500 text-white px-6 py-2 rounded-lg hover:bg-gray-600 transition-colors">
                     Cancel
                 </a>
                 <button type="submit" class="bg-blue-500 text-white px-6 py-2 rounded-lg hover:bg-blue-600 transition-colors">

@@ -106,7 +106,7 @@ def answer_question(request, question_id):
             messages.error(request, f"Error submitting answer: {str(e)}")
             return render(request, "ReadQuestions.html", {"question": question, "answers": question.answers.all()})
         
-        return redirect('question_detail', pk=question_id)  # Ensure 'question_detail' is a valid URL name in your urls.py
+        return redirect('question_detail', question.id)  # Use positional argument for the URL parameter
     
     return render(request, "ReadQuestions.html", {"question": question, "answers": question.answers.all()})
 
@@ -123,10 +123,15 @@ def edit_answer(request, answer_id):
             return render(request, "edit_answer.html", {"answer": answer})
         
         # Update answer
-        answer.answer = answer_content
-        answer.save()
-        messages.success(request, "Your answer has been successfully updated.")
-        return redirect('question_detail', pk=answer.question.id)  # Ensure 'question_detail' is a valid URL name in your urls.py
+        try:
+            answer.answer = answer_content
+            answer.save()
+            messages.success(request, "Your answer has been successfully updated.")
+        except Exception as e:
+            messages.error(request, f"Error updating answer: {str(e)}")
+            return render(request, "edit_answer.html", {"answer": answer})
+        
+        return redirect('question_detail', answer.questions.id)  # Use positional argument for the URL parameter
     
     return render(request, "edit_answer.html", {"answer": answer})
 
@@ -135,9 +140,9 @@ def delete_answer(request, answer_id):
     answer = get_object_or_404(Answers, id=answer_id, user=request.user)
     
     if request.method == "POST":
-        question_id = answer.question.id
+        question_id = answer.questions.id
         answer.delete()
         messages.success(request, "Your answer has been successfully deleted.")
-        return redirect('question_detail', pk=question_id)  # Ensure 'question_detail' is a valid URL name in your urls.py
+        return redirect('question_detail', question_id)  # Use positional argument for the URL parameter
     
     return render(request, "delete_answer.html", {"answer": answer})
