@@ -5,6 +5,7 @@ from .models import Questions, Answers
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.db.models import Q
 
 
 # Create your views here.
@@ -20,6 +21,14 @@ class QuestionsListView(ListView):
     template_name = "questions.html"
     context_object_name = "questions"
     ordering = ["-dateCreated"]
+
+    def get_queryset(self):
+        query = self.request.GET.get('q')
+        if query:
+            return Questions.objects.filter(
+                Q(title__icontains=query) | Q(description__icontains=query)
+            ).order_by('-dateCreated')
+        return super().get_queryset()
 
 class DetailedCreateView(DetailView):
     model = Questions
@@ -106,7 +115,7 @@ def answer_question(request, question_id):
             messages.error(request, f"Error submitting answer: {str(e)}")
             return render(request, "ReadQuestions.html", {"question": question, "answers": question.answers.all()})
         
-        return redirect('question_detail', question.id)  # Use positional argument for the URL parameter
+        return redirect('answer_question', question.id)  # Use positional argument for the URL parameter
     
     return render(request, "ReadQuestions.html", {"question": question, "answers": question.answers.all()})
 
@@ -131,7 +140,7 @@ def edit_answer(request, answer_id):
             messages.error(request, f"Error updating answer: {str(e)}")
             return render(request, "edit_answer.html", {"answer": answer})
         
-        return redirect('question_detail', answer.questions.id)  # Use positional argument for the URL parameter
+        return redirect('answer_question', answer.questions.id)  # Use positional argument for the URL parameter
     
     return render(request, "edit_answer.html", {"answer": answer})
 
@@ -143,6 +152,6 @@ def delete_answer(request, answer_id):
         question_id = answer.questions.id
         answer.delete()
         messages.success(request, "Your answer has been successfully deleted.")
-        return redirect('question_detail', question_id)  # Use positional argument for the URL parameter
+        return redirect('answer_question', question_id)  # Use positional argument for the URL parameter
     
     return render(request, "delete_answer.html", {"answer": answer})

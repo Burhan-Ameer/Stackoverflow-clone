@@ -24,3 +24,71 @@
     display: flex;
     gap: 23px;
 }
+
+/* styles.css */
+
+/* Primary color (70%) */
+body {
+    background-color: #1D1616;
+    color: #EEEEEE;
+}
+
+/* Secondary color (20%) */
+nav a:hover,
+button,
+.inline-block {
+    background-color: #8E1616;
+    color: #EEEEEE;
+}
+
+/* Accent color (10%) */
+nav a:hover,
+input,
+button:hover,
+.inline-block:hover {
+    border-color: #D84040;
+    color: #D84040;
+}
+
+/* Specific elements */
+header {
+    background-color: #1D1616;
+}
+
+nav a {
+    color: #EEEEEE;
+}
+
+input {
+    border: 1px solid #D84040;
+}
+
+button {
+    background-color: #8E1616;
+    color: #EEEEEE;
+}
+
+button:hover {
+    background-color: #D84040;
+}
+
+.inline-block {
+    background-color: #8E1616;
+    color: #EEEEEE;
+}
+
+.inline-block:hover {
+    background-color: #D84040;
+}
+
+#dropdown-menu {
+    background-color: #1D1616;
+}
+
+#dropdown-menu a {
+    color: #EEEEEE;
+}
+
+#dropdown-menu a:hover {
+    background-color: #8E1616;
+}

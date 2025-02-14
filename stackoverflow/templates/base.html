@@ -16,16 +16,16 @@
         </div>
         <!-- Menu for larger screens -->
         <nav class="hidden lg:flex space-x-4">
-            <a href="{% url 'questions' %}" class="text-white  rounded-full  p-2 hover:bg-gray-100 hover:text-indigo-600">Questions</a>
-            <a href="#" class="text-white   rounded-full  p-2 hover:bg-gray-100 hover:text-indigo-600">Tags</a>
-            <a href="#" class="text-white   rounded-full  p-2 hover:bg-gray-100 hover:text-indigo-600">Users</a>
-            <a href="#" class="text-white   rounded-full  p-2 hover:bg-gray-100 hover:text-indigo-600">Jobs</a>
+            <a href="{% url 'questions' %}" class="text-white hover:underline">Questions</a>
+            <a href="#" class="text-white hover:underline">Tags</a>
+            <a href="#" class="text-white hover:underline">Users</a>
+            <a href="#" class="text-white hover:underline">Jobs</a>
         </nav>
         <!-- Search bar -->
-        <div class="hidden lg:flex items-center space-x-2">
-            <input type="text" placeholder="Search..." class="p-2 rounded">
-            <button class="bg-blue-500 p-2 rounded text-white">Search</button>
-        </div>
+        <form action="{% url 'questions' %}" method="get" class="hidden lg:flex items-center space-x-2">
+            <input type="text" name="q" placeholder="Search..." class="p-2 rounded" value="{{ request.GET.q }}">
+            <button type="submit" class="p-2 rounded text-white  bg-blue-600 " ;">Search</button>
+        </form>
         <!-- Authentication buttons -->
         <div class="hidden lg:flex space-x-4 items-center">
             {% if request.user.is_authenticated %}
@@ -60,13 +60,13 @@
     <!-- Mobile menu -->
     <div id="mobile-menu" class="hidden lg:hidden">
         <nav class="space-y-2 p-4">
-            <a href="#" class="block text-white rounded-full  p-2 hover:bg-gray-100 ">Questions</a>
+            <a href="#" class="block text-white hover:underline">Questions</a>
             <a href="#" class="block text-white hover:underline">Tags</a>
             <a href="#" class="block text-white hover:underline">Users</a>
             <a href="#" class="block text-white hover:underline">Jobs</a>
             <div class="flex flex-col space-y-2 mt-4">
                 <input type="text" placeholder="Search..." class="p-2 rounded">
-                <button class="bg-blue-500 p-2 rounded text-white">Search</button>
+                <button class="p-2 rounded text-white">Search</button>
             </div>
             <div class="flex flex-col space-y-2 mt-4">
                 {% if user.is_authenticated %}
@@ -91,7 +91,7 @@
 </main>
 
 <!-- Footer -->
-<footer class="bg-indigo-800 text-white p-4 mt-4 relative bottom-0 w-full">
+<footer class="bg-indigo-800 text-white p-4 mt-4 absolute bottom-0 w-full">
     <div class="container mx-auto text-center">
         <p>&copy; 2023 Stack Overflow Clone. All rights reserved.</p>
         <nav class="space-x-4">
