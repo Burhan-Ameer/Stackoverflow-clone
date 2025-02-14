@@ -12,14 +12,14 @@
             on <span class="font-semibold">{{ question.dateCreated }}</span>
         </div>
         <div class="flex space-x-4 mt-4">
-          {% if request.user == question.user %}
-          <a href="{% url 'update_question' question.id %}" class="bg-blue-500 text-white px-4 py-2 rounded-lg hover:bg-blue-600 transition-colors">
-            Update Question
-        </a>
-        <button onclick="openModal()" class="bg-red-500 text-white px-4 py-2 rounded-lg hover:bg-red-600 transition-colors">
-            Delete Question
-        </button> 
-          {% endif %}
+            {% if request.user == question.user %}
+            <button onclick="openModal()" class="bg-red-500 text-white px-4 py-2 rounded-lg hover:bg-red-600 transition-colors">
+                Delete Question
+            </button>
+            <a href="{% url 'update_question' question.id %}" class="bg-blue-500 text-white px-4 py-2 rounded-lg hover:bg-blue-600 transition-colors">
+                Update Question
+            </a>
+            {% endif %}
         </div>
     </div>
 
@@ -28,10 +28,23 @@
         <h2 class="text-xl font-bold mb-4">Answers</h2>
         {% for answer in answers %}
         <div class="bg-white rounded-lg shadow p-4 mb-4">
-            <p class="mb-2">{{ answer.content }}</p>
+            <p class="mb-2">{{ answer.answer }}</p>
             <div class="text-gray-600 text-sm">
-                Answered by {{ answer.user }} on {{ answer.created_at }}
+                Answered by {{ answer.user }} on {{ answer.dateCreated }}
             </div>
+            {% if request.user == answer.user %}
+            <div class="flex space-x-4 mt-4">
+                <a href="{% url 'edit_answer' answer.id %}" class="bg-yellow-500 text-white px-4 py-2 rounded-lg hover:bg-yellow-600 transition-colors">
+                    Edit Answer
+                </a>
+                <form method="POST" action="{% url 'delete_answer' answer.id %}">
+                    {% csrf_token %}
+                    <button type="submit" class="bg-red-500 text-white px-4 py-2 rounded-lg hover:bg-red-600 transition-colors">
+                        Delete Answer
+                    </button>
+                </form>
+            </div>
+            {% endif %}
         </div>
         {% endfor %}
     </div>
@@ -39,7 +52,7 @@
     <!-- Answer Form -->
     <div class="bg-white rounded-lg shadow-lg p-6">
         <h2 class="text-xl font-bold mb-4">Your Answer</h2>
-        <form method="POST" action="">
+        <form method="POST" action="{% url 'answer_question' question.id %}">
             {% csrf_token %}
             <div class="mb-4">
                 <textarea 
@@ -66,7 +79,7 @@
                 {% csrf_token %}
                 <button type="submit" class="btn-delete">Delete</button>
             </form>
-        </div>  
+        </div>
     </div>
 </div>
 

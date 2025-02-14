@@ -15,7 +15,7 @@
 
     {% for question in questions %}
     <div class="bg-white shadow-md rounded-lg p-4 mb-4">
-        <a href="{% url 'question_detail' question.id %}" class="text-xl font-semibold mb-2">{{question.title }}</a>
+        <a href="{% url 'answer_question' question.id %}" class="text-xl font-semibold mb-2">{{question.title }}</a>
         <hr>
         <p class="p-2">{{question.description|truncatewords:50}}</p>
         
